@@ -40,6 +40,7 @@ def home(request):
 
   visit.save()
 
+  print '>>>>>>>>>' + str(visit.id)
   return HttpResponse('<table>%s</table>' % '\n'.join(html))
 
 # Create your views here.
