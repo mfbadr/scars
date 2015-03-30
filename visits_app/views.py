@@ -9,16 +9,14 @@ import sys
 
 def scars(request, pk):
   print pk
+  return render(request, 'visits_app/scars.html', {})
 
-  
-
-  return HttpResponse('foo')
 def home(request):
 
   ua_string = request.META.get('HTTP_USER_AGENT')
   user_agent = parse(ua_string)
 
-  visit = Visit(
+  visit = Visit.objects.create(
       browser = user_agent.browser.family,
       browser_version = user_agent.browser.version_string,
       os = user_agent.os.family,
@@ -31,10 +29,8 @@ def home(request):
       summary = str(user_agent),
       )
 
-  visit.save()
-
   pk = str(visit.id)
 
-  return HttpResponseRedirect('/scars/' + pk)
+  return HttpResponseRedirect('/' + pk)
 
 # Create your views here.

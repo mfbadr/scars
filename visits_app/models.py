@@ -16,11 +16,11 @@ class Visit(models.Model):
 
   device = models.CharField(max_length=128)
 
-  is_mobile = models.BooleanField()
-  is_tablet = models.BooleanField()
-  is_pc = models.BooleanField()
+  is_mobile = models.BooleanField(default=False)
+  is_tablet = models.BooleanField(default=False)
+  is_pc = models.BooleanField(default=False)
 
-  is_bot = models.BooleanField()
+  is_bot = models.BooleanField(default=False)
 
   def __str__(self):
     return self.summary
