@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
+from django.http import JsonResponse
+
 
 from visits_app.models import Visit
 
@@ -8,7 +10,11 @@ from user_agents import parse
 import sys
 
 def scars(request, pk):
-  print pk
+  if request.is_ajax():
+    visits = Visit.objects.all().order_by('-time')
+    print type('is AJAX')
+    return JsonResponse({'foo':'bar'})
+
   return render(request, 'visits_app/scars.html', {})
 
 def home(request):
