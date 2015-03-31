@@ -20,11 +20,9 @@ def home(request):
     current_scar = request.GET['id']
     last = int(current_scar) + 1
     visits = Visit.objects.filter(id__lte = last).order_by('time')
-    print len(visits)
     visits = visits.values()
     visits_dict = {}
     for x in range(0, last - 1):
-      print x
       visits_dict[str(x + 1)] = visits[x]
 
     #print visits_dict
