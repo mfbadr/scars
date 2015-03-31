@@ -44,15 +44,25 @@ $(function(){
     console.log('colwidth', colWidth);
 
 
-    //construct a fabric object based on visit attr
     var row = 1;
+    //construct scars and push to fabricScars;
     for(var i = 0; i < visits.length; i++){
-      //swithc on tablet/pc/mobile
+      console.log(visits[i].device);
+      var fill;
+      if(visits[i].is_mobile){
+        fill = 'blue';
+      }else if(visits[i].is_pc){
+        fill = 'red';
+      }else if(visits[i].is_bot){
+        fill = 'green';
+      }else{
+        fill = 'white';
+      }
 
       var thisScar = new fabric.Rect({
         left: colWidth * ((visits[i].id % 10) + 1),
         top: Math.ceil(visits[i].id / 10) * 25,
-        fill: 'red',
+        fill: fill,
         width: 10,
         angle: 45,
         height: 10,
