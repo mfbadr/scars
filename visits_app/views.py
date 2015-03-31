@@ -10,14 +10,25 @@ from user_agents import parse
 import sys
 
 def scars(request, pk):
-  if request.is_ajax():
-    visits = Visit.objects.all().order_by('-time')
-    print type('is AJAX')
-    return JsonResponse({'foo':'bar'})
+
 
   return render(request, 'visits_app/scars.html', {})
 
 def home(request):
+
+  if request.is_ajax():
+    current_scar = request.GET['id']
+    last = int(current_scar) + 1
+    visits = Visit.objects.filter(id__lte = last).order_by('time')
+    print len(visits)
+    visits = visits.values()
+    visits_dict = {}
+    for x in range(0, last - 1):
+      print x
+      visits_dict[str(x + 1)] = visits[x]
+
+    #print visits_dict
+    return JsonResponse(visits_dict)
 
   ua_string = request.META.get('HTTP_USER_AGENT')
   user_agent = parse(ua_string)
