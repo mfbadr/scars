@@ -13,15 +13,11 @@ $(function(){
   //scars_canvas.style.border = "2px solid black";
   var width = window.innerWidth;
   var height = window.innerHeight;
-  console.log('width', width);
-  console.log('height', height);
-  scars_canvas.style.width = width + 'px';
-  scars_canvas.style.height = height + 'px';
-  scars_context.canvas.width = width;
-  scars_context.canvas.height = height;
-  scars_canvas.style.border = '2px solid white';
 
+  scarsFabric.setHeight(height);
+  scarsFabric.setWidth(width);
 
+  //scars_canvas.style.border = '2px solid white';
 
   function getScars(id, cb){
     var scars = [];
@@ -39,16 +35,14 @@ $(function(){
   function drawScars(visits){
     //set up counters, analyze canvas
     var fabricScars = [],
-        colWidth = width / 11;
+        columns = 25,
+        colWidth = width / columns + 1;
 
-    console.log('colwidth', colWidth);
-
-
-    var row = 1;
     //construct scars and push to fabricScars;
     for(var i = 0; i < visits.length; i++){
       console.log(visits[i].device);
       var fill;
+
       if(visits[i].is_mobile){
         fill = 'blue';
       }else if(visits[i].is_pc){
@@ -60,8 +54,9 @@ $(function(){
       }
 
       var thisScar = new fabric.Rect({
-        left: colWidth * ((visits[i].id % 10) + 1),
-        top: Math.ceil(visits[i].id / 10) * 25,
+        left: colWidth * (((visits[i].id - 1) % columns ) + 1),
+        //top: Math.ceil(visits[i].id / 10) * 25,
+        top: height,
         fill: fill,
         width: 10,
         angle: 45,
@@ -71,9 +66,17 @@ $(function(){
     }
 
     //draw scars
-    for(var i = 0; i < fabricScars.length; i++){
-      scarsFabric.add(fabricScars[i]);
+    var index = 0;
+    function nextScar(){
+      scarsFabric.add(fabricScars[index]);
+      fabricScars[index].animate('top',Math.ceil(visits[index].id / columns) * 25, { 
+        duration: 2400,
+        //easing: fabric.util.ease.easeOutBounce,
+        onChange: scarsFabric.renderAll.bind(scarsFabric)
+      })
+      index = (index + 1) % fabricScars.length;
     }
+    setInterval(nextScar, 200);
   }
 
   getScars(id, drawScars);
