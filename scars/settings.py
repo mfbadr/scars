@@ -75,12 +75,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'scars.wsgi.application'
 
-DEBUG = False
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #}
+#}
+DEBUG = False
+import dj_database_url
+DATABASES = {}
+DATABASES['default'] =  dj_database_url.config()
 
 try:
   from localsettings import *
