@@ -40,7 +40,7 @@ $(function(){
 
     //construct scars and push to fabricScars;
     for(var i = 0; i < visits.length; i++){
-      console.log(visits[i].device);
+      //console.log(visits[i].device);
       var fill;
 
       if(visits[i].is_mobile){
@@ -71,12 +71,12 @@ $(function(){
       scarsFabric.add(fabricScars[index]);
       fabricScars[index].animate('top',Math.ceil(visits[index].id / columns) * 25, { 
         duration: 2400,
-        //easing: fabric.util.ease.easeOutBounce,
+        easing: fabric.util.ease.easeOutCirc,
         onChange: scarsFabric.renderAll.bind(scarsFabric)
       })
       index = (index + 1) % fabricScars.length;
     }
-    setInterval(nextScar, 200);
+    setInterval(nextScar, 20);
   }
 
   getScars(id, drawScars);

@@ -11,7 +11,6 @@ import sys
 
 def scars(request, pk):
 
-
   return render(request, 'visits_app/scars.html', {})
 
 def home(request):
