@@ -11,7 +11,7 @@ $(function(){
   });
 
   //scars_canvas.style.border = "2px solid black";
-  var width = window.innerWidth;
+  var width = window.innerWidth - 10;
   var height = window.innerHeight;
 
   scarsFabric.setHeight(height);
@@ -30,7 +30,6 @@ $(function(){
       cb(scars);
     })
   }
-
 
   function drawScars(visits){
     //set up counters, analyze canvas

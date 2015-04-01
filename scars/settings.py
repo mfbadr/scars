@@ -19,6 +19,7 @@ print 'TEMPLATE_PATH ' + TEMPLATE_PATH
 TEMPLATE_DIRS = [TEMPLATE_PATH]
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
@@ -26,7 +27,6 @@ TEMPLATE_DIRS = [TEMPLATE_PATH]
 SECRET_KEY = 'sgms=%+==^wkegc$5@dhj8hr)dms=3(npqjjn8)nqws)j8vx5s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -75,15 +75,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'scars.wsgi.application'
 
+DEBUG = False
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+try:
+  from localsettings import *
+except ImportError:
+  pass
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
