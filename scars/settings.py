@@ -13,9 +13,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print 'BASE_DIR ' + str(BASE_DIR)
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
-print 'TEMPLATE_PATH ' + TEMPLATE_PATH
 TEMPLATE_DIRS = [TEMPLATE_PATH]
 
 
