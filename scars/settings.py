@@ -26,7 +26,7 @@ SECRET_KEY = 'sgms=%+==^wkegc$5@dhj8hr)dms=3(npqjjn8)nqws)j8vx5s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
