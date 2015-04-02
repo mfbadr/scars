@@ -11,7 +11,7 @@ $(function(){
   });
 
   //scars_canvas.style.border = "2px solid black";
-  var width = window.innerWidth - 10;
+  var width = window.innerWidth;
   var height = window.innerHeight;
 
   scarsFabric.setHeight(height);
